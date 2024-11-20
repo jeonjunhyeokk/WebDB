@@ -1,0 +1,43 @@
+<div>
+    <h2>cart 테이블 수정</h2>
+    <form action="/cart/update_process" method="POST">
+        <!-- cart_id를 숨겨진 필드로 전달 -->
+        <input type="hidden" name="cart_id" value="<%= cart.cartId %>">
+
+        <!-- 고객 선택 -->
+        <div class="mb-3">
+            <label for="customer" class="form-label">고객</label>
+            <select id="customer" name="loginid" class="form-select">
+                <% customers.forEach(function (customer) { %>
+                    <option value="<%= customer.loginid %>" <%=cart.loginId===customer.loginid ? 'selected' : '' %>>
+                        <%= customer.customerName %>
+                    </option>
+                    <% }); %>
+            </select>
+        </div>
+
+        <!-- 상품 선택 -->
+        <div class="mb-3">
+            <label for="product" class="form-label">상품</label>
+            <select id="product" name="mer_id" class="form-select">
+                <% products.forEach(function (product) { %>
+                    <option value="<%= product.mer_id %>" <%=cart.merId===product.mer_id ? 'selected' : '' %>>
+                        <%= product.productName %>
+                    </option>
+                    <% }); %>
+            </select>
+        </div>
+
+        <!-- 날짜 -->
+        <div class="mb-3">
+            <label for="date" class="form-label">날짜</label>
+            <input type="text" id="date" name="date" class="form-control" value="<%= cart.date %>" readonly>
+        </div>
+
+        <!-- 버튼 -->
+        <div>
+            <button type="submit" class="btn btn-outline-primary btn-sm">수정</button>
+            <a href="/cart/view" class="btn btn-outline-primary btn-sm">카트 목록 돌아가기</a>
+        </div>
+    </form>
+</div>

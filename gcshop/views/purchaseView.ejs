@@ -1,0 +1,71 @@
+<table class="table table-bordered border-primary table-hover" style="text-align: center;">
+    <thead class="table-primary">
+        <tr>
+            <th>고객 ID</th>
+            <th>고객명</th>
+            <th>상품 ID</th>
+            <th>상품명</th> <!-- 상품명을 위한 새로운 열 -->
+            <th>구매일</th>
+            <th>가격</th>
+            <th>포인트</th>
+            <th>구매량</th>
+            <th>총가격</th>
+            <th>지불여부</th>
+            <th>취소여부</th>
+            <th>환불여부</th>
+            <th colspan="2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if (purchaseItems.length > 0) { %>
+            <% purchaseItems.forEach(purchase => { %>
+                <tr>
+                    <td>
+                        <%= purchase.loginid %> <!-- 고객 ID는 purchase 테이블의 loginid -->
+                    </td>
+                    <td>
+                        <%= purchase.customer_name %> <!-- 고객명 추가 -->
+                    </td>
+                    <td>
+                        <%= purchase.mer_id %>
+                    </td>
+                    <td>
+                        <%= purchase.mer_name %>
+                    </td> <!-- 상품명 추가 -->
+                    <td>
+                        <%= purchase.date %>
+                    </td>
+                    <td>
+                        <%= purchase.price %>원
+                    </td>
+                    <td>
+                        <%= purchase.point %>
+                    </td>
+                    <td>
+                        <%= purchase.qty %>
+                    </td>
+                    <td>
+                        <%= purchase.total %>원
+                    </td>
+                    <td>
+                        <%= purchase.payYN %>
+                    </td>
+                    <td>
+                        <%= purchase.cancel %>
+                    </td>
+                    <td>
+                        <%= purchase.refund %>
+                    </td>
+                    <td><a href="/purchaseview/update/<%= purchase.purchase_id %>" style="text-decoration: none;">수정</a>
+                    </td>
+                    <td><a href="/purchaseview/delete/<%= purchase.purchase_id %>" style="text-decoration: none;"
+                            onclick="if(confirm('정말로 삭제하시겠습니까?')==false) return false">삭제</a></td>
+                </tr>
+            <% }); %>
+        <% } else { %>
+            <tr>
+                <td colspan="14">구매 내역이 없습니다.</td> <!-- colspan 수정 -->
+            </tr>
+        <% } %>
+    </tbody>
+</table>

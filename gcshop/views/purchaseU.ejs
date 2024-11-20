@@ -1,0 +1,88 @@
+<div class="container mt-5">
+    <form action="/purchaseview/update_process" method="POST" class="mt-4">
+        <input type="hidden" name="purchase_id" value="<%= purchase.purchase_id %>">
+
+<!-- 고객 -->
+<div class="mb-3">
+    <label for="loginid" class="form-label">고객</label>
+    <select id="loginid" name="loginid" class="form-select">
+        <% persons.forEach(person=> { %>
+            <option value="<%= person.loginid %>" <%=person.loginid===purchase.loginid ? 'selected' : '' %>>
+                <%= person.name %>
+            </option>
+            <% }); %>
+    </select>
+</div>
+
+<!-- 상품 -->
+<div class="mb-3">
+    <label for="mer_id" class="form-label">상품</label>
+    <select id="mer_id" name="mer_id" class="form-select" required>
+        <% products.forEach(product=> { %>
+            <option value="<%= product.mer_id %>" <%=product.mer_id===purchase.mer_id ? 'selected' : '' %>>
+                <%= product.name %>
+            </option>
+            <% }); %>
+    </select>
+</div>
+
+
+        <!-- 가로 배치된 필드 -->
+        <div class="d-flex flex-wrap gap-3 mb-3">
+            <div class="flex-grow-1">
+                <label for="date" class="form-label">날짜</label>
+                <input type="datetime-local" id="date" name="date" class="form-control" value="<%= purchase.date || '' %>" required>
+            </div>
+            <div class="flex-grow-1">
+                <label for="price" class="form-label">가격</label>
+                <input type="number" id="price" name="price" class="form-control" value="<%= purchase.price %>" required>
+            </div>
+            <div class="flex-grow-1">
+                <label for="point" class="form-label">포인트</label>
+                <input type="number" id="point" name="point" class="form-control" value="<%= purchase.point %>" required>
+            </div>
+            <div class="flex-grow-1">
+                <label for="qty" class="form-label">수량</label>
+                <input type="number" id="qty" name="qty" class="form-control" value="<%= purchase.qty %>" min="1" required>
+            </div>
+        </div>
+
+        <!-- 총 금액 -->
+        <div class="mb-3">
+            <label for="total" class="form-label">총액</label>
+            <input type="number" id="total" name="total" class="form-control" value="<%= purchase.total %>" readonly>
+        </div>
+
+        <!-- 지불 여부 -->
+        <div class="mb-3">
+            <label for="payYN" class="form-label">지불 여부</label>
+            <select id="payYN" name="payYN" class="form-select">
+                <option value="Y" <%= purchase.payYN === 'Y' ? 'selected' : '' %>>YES</option>
+                <option value="N" <%= purchase.payYN === 'N' ? 'selected' : '' %>>NO</option>
+            </select>
+        </div>
+
+        <!-- 취소 여부 -->
+        <div class="mb-3">
+            <label for="cancel" class="form-label">취소 여부</label>
+            <select id="cancel" name="cancel" class="form-select">
+                <option value="Y" <%= purchase.cancel === 'Y' ? 'selected' : '' %>>YES</option>
+                <option value="N" <%= purchase.cancel === 'N' ? 'selected' : '' %>>NO</option>
+            </select>
+        </div>
+
+        <!-- 환불 여부 -->
+        <div class="mb-3">
+            <label for="refund" class="form-label">환불 여부</label>
+            <select id="refund" name="refund" class="form-select">
+                <option value="Y" <%= purchase.refund === 'Y' ? 'selected' : '' %>>YES</option>
+                <option value="N" <%= purchase.refund === 'N' ? 'selected' : '' %>>NO</option>
+            </select>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">수정</button>
+            <a href="/purchaseview" class="btn btn-secondary">구매 목록 돌아가기</a>
+        </div>
+    </form>
+</div>

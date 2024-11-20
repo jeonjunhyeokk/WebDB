@@ -1,0 +1,64 @@
+<div class="container">
+	<h2>
+		<% if (cls==='MNG' ) { %>
+			관리자 기능: 회원생성
+			<% } else { %>
+				회원가입
+				<% } %>
+	</h2>
+	<form action="<%= cls === 'MNG' ? '/person/create_process' : '/auth/register_process' %>" method="post">
+		<div class="mb-3">
+			<label class="form-label" for="loginid">ID</label>
+			<input class="form-control" type="text" name="loginid" placeholder="아이디를 입력해 주세요" style="width:300px;"
+				required />
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="password">PW</label>
+			<input class="form-control" type="password" name="password" placeholder="패스워드를 입력해 주세요" style="width:300px;"
+				required />
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="name">이름</label>
+			<input class="form-control" type="text" name="name" placeholder="이름을 입력해 주세요" style="width:300px;"
+				required />
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="address">주소</label>
+			<input class="form-control" type="text" name="address" placeholder="주소를 입력해 주세요" style="width:300px;"
+				required />
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="tel">전화번호</label>
+			<input class="form-control" type="text" name="tel" placeholder="000-0000-0000" style="width:300px;"
+				required />
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="birth">생일</label>
+			<input class="form-control" type="text" name="birth" placeholder="YYYYMMDD" style="width:300px;" required />
+		</div>
+
+		<% if (cls==='MNG' ) { %> <!-- 관리자인 경우에만 표시 -->
+			<div class="mb-3">
+				<label class="form-label" for="class">CLASS</label>
+				<select name="class" id="class">
+					<option value="CEO">경영자</option>
+					<option value="MNG">관리자</option>
+					<option value="CST">고객</option>
+				</select>
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="grade">GRADE</label>
+				<select name="grade" id="grade">
+					<option value="S">실버(가장 낮은 등급)</option>
+					<option value="G">골드(중간 등급)</option>
+					<option value="D">다이아몬드(가장 높은 등급)</option>
+				</select>
+			</div>
+			<button class="btn btn-outline-primary btn-sm" type="submit">입력</button>
+			<a href="/person/view"><button class="btn btn-outline-primary btn-sm" type="button">고객 목록
+					돌아가기</button></a>
+			<% } else { %> <!-- 일반 사용자의 경우 '입력' 버튼만 표시 -->
+				<button class="btn btn-outline-primary btn-sm" type="submit">입력</button>
+				<% } %>
+	</form>
+</div>

@@ -1,0 +1,49 @@
+<div class="container">
+	<h2>관리자 기능 : 회원 정보 수정</h2>
+	<form action="/person/update_process" method="post">
+		<div class="mb-3">
+			<label class="form-label" for="loginid">ID</label>
+			<input class="form-control" type="text" name="loginid" value="<%= person.loginid %>" placeholder="아이디를 입력해 주세요" style="width:300px;" required readonly />
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="password">PW</label>
+			<input class="form-control" type="password" name="password" value="<%=person.password %>" placeholder="패스워드를 입력해 주세요" style="width:300px;" required />
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="name">이름</label>
+			<input class="form-control" type="text" name="name" value="<%= person.name %>" placeholder="이름을 입력해 주세요" style="width:300px;" required />
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="address">주소</label>
+			<input class="form-control" type="text" name="address" value="<%= person.address %>" placeholder="주소를 입력해 주세요" style="width:300px;" required />
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="tel">전화번호</label>
+			<input class="form-control" type="text" name="tel" value="<%= person.tel %>" placeholder="000-0000-0000" style="width:300px;" required />
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="birth">생일</label>
+			<input class="form-control" type="text" name="birth" value="<%= person.birth %>" placeholder="YYYYMMDD" style="width:300px;" required />
+		</div>
+
+		<div class="mb-3">
+			<label class="form-label" for="class">CLASS</label>
+			<select name="class" id="class">
+				<option value="CEO" <%= person.class === 'CEO' ? 'selected' : '' %>>경영자</option>
+				<option value="MNG" <%= person.class === 'MNG' ? 'selected' : '' %>>관리자</option>
+				<option value="CST" <%= person.class === 'CST' ? 'selected' : '' %>>고객</option>
+			</select>
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="grade">GRADE</label>
+			<select name="grade" id="grade">
+				<option value="S" <%= person.grade === 'S' ? 'selected' : '' %>>실버(가장 낮은 등급)</option>
+				<option value="G" <%= person.grade === 'G' ? 'selected' : '' %>>골드(중간 등급)</option>
+				<option value="D" <%= person.grade === 'D' ? 'selected' : '' %>>다이아몬드(가장 높은 등급)</option>
+			</select>
+		</div>
+
+		<button class="btn btn-outline-primary btn-sm" type="submit">수정</button>
+		<a href="/person/view"><button class="btn btn-outline-primary btn-sm" type="button">고객 목록 돌아가기</button></a>
+	</form>
+</div>

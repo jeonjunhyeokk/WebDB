@@ -1,0 +1,90 @@
+<div class="container">	
+    <% if(mode == 'create') { %> 
+        <h2><%-boardtypes[0].title%> 작성</h2>
+        <form action="/board/create_process" method="post" >
+            <input type="hidden" name="type_id" value="<%=boardtypes[0].type_id%>">
+            <input type="hidden" name="loginid" value="<%=sntzedLoginId%>">
+            <div class="mb-3">
+                <label class="form-label" for="id">제목</label> 
+                <input class="form-control" type="text" name="title" style = "width:300px;" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="id">작성자</label> 
+                <input class="form-control" type="text" name="name" value="<%=who%>" style = "width:300px;" disabled />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="id">내용</label> 
+                <textarea class="form-control" name="content" style = "width:800px;height: 200px;"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="id">갱신 삭제 시 비밀번호</label> 
+                <input class="form-control" type="text" name="password" style = "width:300px;" />
+            </div>
+            <button class="btn btn-outline-primary btn-sm" type="submit">생성</button>
+            
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="/board/view/<%=boardtypes[0].type_id%>/1"> <button type="button" class="btn btn-info me-md-2">목록</button></a>
+            </div>
+        </form>
+    <% } if(mode == 'read') { %> 
+        <form>
+            <input type="hidden" name="type_id" value="<%=board[0].type_id%>">
+            <div class="mb-3">
+                <label class="form-label" for="id">제목</label> 
+                <input class="form-control" type="text" name="title" value="<%=board[0].title%>" style="width:300px;" disabled />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="id">작성자</label> 
+                <input class="form-control" type="text" name="name" value="<%=board[0].name%>" style="width:300px;" disabled />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="id">작성일</label> 
+                <input class="form-control" type="text" name="name" value="<%=board[0].date%>" style="width:300px;" disabled />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="id">내용</label> 
+                <textarea class="form-control" name="content" style="width:800px;height: 200px;" disabled><%=board[0].content%></textarea>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="/board/view/<%=board[0].type_id%>/<%=pNum%>"> <button type="button" class="btn btn-info me-md-2">목록</button></a>
+                <% if(cls === 'MNG' || (cls === 'CST' && sntzedLoginId == board[0].loginid)) { %>
+                    <a href="/board/update/<%=board[0].board_id%>/<%=board[0].type_id%>/<%=pNum%>"><button type="button" class="btn btn-info me-md-2">수정</button></a>
+                    <a href="/board/delete/<%=board[0].board_id%>/<%=board[0].type_id%>/<%=pNum%>" onclick="if(confirm('정말로 삭제하시겠습니까?')==false) return false"><button type="button" class="btn btn-info me-md-2">삭제</button></a>
+                <% } %>
+            </div>
+        </form>
+    <% } if(mode == 'update') { %> 
+        <h2><%-boardtypes[0].title%> 수정</h2>
+        <form action="/board/update_process" method="post" >
+            <input type="hidden" name="type_id" value="<%=boardtypes[0].type_id%>">
+            <input type="hidden" name="board_id" value="<%=board[0].board_id%>">
+            <input type="hidden" name="pNum" value="<%=pNum%>">
+            <div class="mb-3">
+                <label class="form-label" for="id">제목</label> 
+                <input class="form-control" type="text" name="title" value="<%=board[0].title%>" style="width:300px;" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="id">작성자</label> 
+                <input class="form-control" type="text" name="name" value="<%=board[0].name%>" style = "width:300px;" disabled/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="id">내용</label>
+                <textarea class="form-control" name="content" style="width:800px;height: 200px;"><%=board[0].content%></textarea>
+            </div>
+            <% if(cls !== 'MNG') { %> 
+                <div class="mb-3">
+                    <label class="form-label" for="id">갱신 삭제 시 비밀번호</label> 
+                    <input class="form-control" type="text" name="password" style = "width:300px;" />
+                </div>
+            <% } %>
+            <button class="btn btn-outline-primary btn-sm" type="submit">수정</button>
+            
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="/board/view/<%=boardtypes[0].type_id%>/<%=pNum%>"> <button type="button" class="btn btn-info me-md-2">목록</button></a>
+                <a href="/board/delete/<%=board[0].board_id%>/<%=board[0].type_id%>/<%=pNum%>" onclick="if(confirm('정말로 삭제하시겠습니까?')==false) return false"> 
+                    <button type="button" class="btn btn-info me-md-2">삭제</button> 
+                </a>
+            </div>
+      </form>
+    <% } %>
+</div>

@@ -1,0 +1,22 @@
+<table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>테이블 명</th>
+            <th>테이블 설명</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if (tables.length > 0) { %>
+            <% tables.forEach(function(table) { %>
+                <tr>
+                    <td><a href="/tablemanage/<%= table.name %>"><%= table.name %></a></td>
+                    <td><%= table.description %></td>
+                </tr>
+            <% }); %>
+        <% } else { %>
+            <tr>
+                <td colspan="2">테이블이 없습니다.</td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>

@@ -1,0 +1,38 @@
+<div class="container">
+    <h2><%= mode === 'create' ? '코드 입력' : '코드 수정' %></h2>
+    <form action="<%= mode === 'create' ? '/code/create_process' : '/code/update_process' %>" method="post">
+        <% if (mode === 'update') { %>
+            <input type="hidden" name="main_id" value="<%= code.main_id %>" />
+            <input type="hidden" name="sub_id" value="<%= code.sub_id %>" />
+            <input type="hidden" name="start" value="<%= code.start %>" />
+            <input type="hidden" name="end" value="<%= code.end %>" />
+        <% } else { %>
+            <div class="mb-3">
+                <label class="form-label" for="main_id">대분류</label> 
+                <input class="form-control" type="text" name="main_id" id="main_id" style="width:300px;" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="sub_id">소분류</label> 
+                <input class="form-control" type="text" name="sub_id" id="sub_id" style="width:300px;" required />
+            </div>
+        <% } %>
+        <div class="mb-3">
+			<label class="form-label" for="main_name">대분류명</label> 
+			<input class="form-control" type="text" name="main_name" id="main_name" value="<%= mode === 'update' ? code.main_name : '' %>" style="width:300px;" required />
+		</div>
+        <div class="mb-3">
+            <label class="form-label" for="sub_name">소분류명</label> 
+            <input class="form-control" type="text" name="sub_name" id="sub_name" value="<%= mode === 'update' ? code.sub_name : '' %>" style="width:300px;" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="start">시작일</label> 
+            <input class="form-control" type="text" name="start" value="<%= mode === 'update' ? code.start : '' %>" style="width:300px;" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="end">종료일</label> 
+            <input class="form-control" type="text" name="end" value="<%= mode === 'update' ? code.end : '' %>" style="width:300px;" required />
+        </div>
+        <button class="btn btn-outline-primary btn-sm" type="submit"><%= mode === 'create' ? '입력' : '수정' %></button>
+        <a href="/code/view" class="btn btn-outline-primary btn-sm">코드 목록으로 돌아가기</a>
+    </form>
+</div>

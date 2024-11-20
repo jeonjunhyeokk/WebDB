@@ -1,0 +1,35 @@
+<table class="table table-bordered">
+    <form method="post">
+        <tr>
+            <td rowspan="5">
+                <img src="<%= product.image %>" style="width:300px;height:300px;" alt="<%= product.name %>">
+            </td>
+            <td>
+                <%= product.name %>
+            </td>
+        </tr>
+        <tr>
+            <td>가격: <%= product.price.toLocaleString() %> 원</td>
+        </tr>
+        <tr>
+            <td>브랜드: <%= product.brand %>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                수량:
+                <input type="number" name="qty" min="1" required>
+            </td>
+        </tr>
+        <!-- 숨겨진 필드 -->
+        <input type="hidden" name="loginid" value="<%= user ? user.loginid : 'Guest' %>">
+        <input type="hidden" name="mer_id" value="<%= product.mer_id %>"> <!-- mer_id 오류 수정 -->
+        <input type="hidden" name="price" value="<%= product.price %>">
+        <tr>
+            <td>
+                <button class="btn btn-outline-primary btn-sm" formaction="/purchase" type="submit">결제</button>
+                <button class="btn btn-outline-primary btn-sm" formaction="/purchase/cart/add" type="submit">장바구니</button>
+            </td>
+        </tr>
+    </form>
+</table>

@@ -1,0 +1,48 @@
+<table class="table table-bordered" style="text-align: center;">
+    <thead class="table-primary">
+        <tr>
+            <th>상품</th>
+            <th>상품명</th>
+            <th>가격</th>
+            <th>브랜드</th>
+            <% if (login && cls === 'MNG') { %> <!-- 로그인 상태이며 관리자일 때만 수정/삭제 칸 추가 -->
+                <th colspan="2"></th>
+            <% } %>
+        </tr>
+    </thead>
+    <tbody>
+        <% if (products.length > 0) { %>
+            <% products.forEach(function(product) { %>
+                <tr>
+                    <!-- 사진에 링크 추가 -->
+                    <td>
+                        <a href="/detail/<%= product.mer_id %>" style="text-decoration: none;">
+                            <img src="<%= product.image %>" style="width:100px;height:100px;">
+                        </a>
+                    </td>
+                    <td><%= product.name %></td>
+                    <td><%= product.price.toLocaleString() %> 원</td> <!-- 가격 포맷 -->
+                    <td><%= product.brand %></td>
+                    <% if (login && cls === 'MNG') { %> <!-- 로그인 상태이며 관리자일 때만 수정/삭제 링크 추가 -->
+                        <td>
+                            <a href="/product/update/<%= product.mer_id %>">수정</a>
+                        </td>
+                        <td>
+                            <a href="/product/delete/<%= product.mer_id %>" onclick="if(confirm('정말로 삭제하시겠습니까?')==false) return false">삭제</a>
+                        </td>
+                    <% } %>
+                </tr>
+            <% }); %>
+        <% } else { %>
+            <tr>
+                <td colspan="<%= login ? (cls === 'MNG' ? 6 : 5) : 5 %>">자료가 없습니다. 상품 추가 버튼을 눌러 상품을 추가해 주세요.</td> <!-- 칸 수 조정 -->
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+
+<% if (login && cls === 'MNG') { %> <!-- 로그인 상태이고 관리자(MNG)일 때만 상품 추가 버튼 보이기 -->
+    <a href="/product/create">
+        <button class="btn btn-outline-secondary btn-sm" type="button">상품 추가</button>
+    </a>
+<% } %>

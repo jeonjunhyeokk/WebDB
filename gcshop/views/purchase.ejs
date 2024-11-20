@@ -1,0 +1,63 @@
+<div class="content">
+    <h2>구매 목록</h2>
+    <table class="table table-bordered purchase-table">
+        <thead class="thead-dark">
+            <tr>
+                <th style="text-align: center;">이미지</th>
+                <th style="text-align: center;">상품명</th>
+                <th style="text-align: center;">단가</th>
+                <th style="text-align: center;">구매량</th>
+                <th style="text-align: center;">총금액</th>
+                <th style="text-align: center;">구매일</th>
+                <th style="text-align: center;">취소여부</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (purchases.length> 0) { %> <!-- 구매 데이터가 있는 경우 -->
+                <% purchases.forEach(function(purchase) { %>
+                    <tr>
+                        <!-- 상품 이미지 -->
+                        <td style="text-align: center; vertical-align: middle;">
+                            <img src="<%= purchase.image %>" alt="<%= purchase.name %>"
+                                style="width: 100px; height: 100px;">
+                        </td>
+                        <!-- 상품명 -->
+                        <td style="text-align: center; vertical-align: middle;">
+                            <%= purchase.name %>
+                        </td>
+                        <!-- 단가 -->
+                        <td style="text-align: center; vertical-align: middle;">
+                            <%= purchase.price.toLocaleString() %> 원
+                        </td>
+                        <!-- 구매량 -->
+                        <td style="text-align: center; vertical-align: middle;">
+                            <%= purchase.qty %>
+                        </td>
+                        <!-- 총금액 -->
+                        <td style="text-align: center; vertical-align: middle;">
+                            <%= purchase.total.toLocaleString() %> 원
+                        </td>
+                        <!-- 구매일 -->
+                        <td style="text-align: center; vertical-align: middle;">
+                            <%= purchase.date %>
+                        </td>
+                        <!-- 취소여부 -->
+                        <td style="text-align: center; vertical-align: middle;">
+                            <% if (purchase.cancel==='Y' ) { %>
+                                <span class="text-danger">취소된 상품</span>
+                                <% } else { %>
+                                    <form action="/purchase/cancel/<%= purchase.purchase_id %>" method="POST" style="display:inline;">
+                                        <button class="btn btn-sm btn-danger" type="submit">구매취소</button>
+                                    </form>
+                                    <% } %>
+                        </td>
+                    </tr>
+                    <% }); %>
+                        <% } else { %> <!-- 구매 데이터가 없는 경우 -->
+                            <tr>
+                                <td colspan="7" class="text-center">구매한 상품이 없습니다.</td>
+                            </tr>
+                            <% } %>
+        </tbody>
+    </table>
+</div>

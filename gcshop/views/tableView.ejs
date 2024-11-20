@@ -1,0 +1,18 @@
+<table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <% columns.forEach(function(column) { %>
+                <th><%= column %></th>
+            <% }); %>
+        </tr>
+    </thead>
+    <tbody>
+        <% rows.forEach(function(row) { %>
+            <tr>
+                <% columns.forEach(function(column) { %>
+                    <td><%= row[column] %></td>
+                <% }); %>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>
